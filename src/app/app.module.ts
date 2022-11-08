@@ -11,6 +11,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { IngresoEgresoComponent } from './ingreso-egreso/ingreso-egreso.component';
 import { DetalleComponent } from './ingreso-egreso/detalle/detalle.component';
 import { EstadisticaComponent } from './ingreso-egreso/estadistica/estadistica.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EstadisticaComponent } from './ingreso-egreso/estadistica/estadistica.c
     EstadisticaComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
