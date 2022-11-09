@@ -2,26 +2,28 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
 
-## Development server
+## Crear proyecto en Firebase
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Ir al sitio Web de Firebase
+- Logearse en caso de ser necesario
+- Ir a la consola
+- Crear un nuevo proyecto **(podemos evitar Google Analatytics para proyectos de entrenamiento)**
+- Seleccionar el tipo de proyecto **Andriod, iOS, Web**
+- Establecer un nombre alias para el proyecto **(podemos evitar configurar Firebase Hosting)**
 
-## Code scaffolding
+## Autenticación
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Podemos configurar nuestro proyecto para autenticarse a través de diferentes métodos que provee Firebase
 
-## Build
+- Email y contraseña: Seleccionar y Activar
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Firestore (Base de datos en tiempo real)
 
-## Running unit tests
+Podemos crear una base de datos en tiempo real para nuestro proyecto, es importante que al momento de configurarla, especifiquemos que será de producción y no de pruebas
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Si bien la configuración anterior obliga a nuestros usuarios a estar autenticados para poder escribir en la base de datos, podemos configurar las **reglas** para indicar temporalmente que todo mundo puede leer y escribir
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+// allow read, write: if false;
+allow read, write;
+```
