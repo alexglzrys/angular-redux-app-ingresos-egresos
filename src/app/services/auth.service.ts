@@ -13,4 +13,8 @@ export class AuthService {
     // Retornar la promesa del usuario creado mediante email y password
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
+
+  loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
+    return this.auth.signInWithEmailAndPassword(email, password);
+  }
 }
