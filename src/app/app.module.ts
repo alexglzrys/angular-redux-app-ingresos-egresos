@@ -18,6 +18,7 @@ import { DetalleComponent } from './ingreso-egreso/detalle/detalle.component';
 import { EstadisticaComponent } from './ingreso-egreso/estadistica/estadistica.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
+import { StoreModule } from '@ngrx/store';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent]
