@@ -41,7 +41,6 @@ export class RegisterComponent implements OnInit {
       });
       // Llamar al servicio para registrar nuevo usuario en Firebase
       this.authService.createUser(name, email, password).then(user => {
-        console.log(user);
          // Destruir cualquier instancia abierta de SweetAlert
          Swal.close();
         // Cuando se crea un usuario, Firebase automáticamente lo logea. Dicha información se obtiene a través del objeto devuelto

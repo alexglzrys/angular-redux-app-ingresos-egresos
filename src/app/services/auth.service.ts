@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: AngularFireAuth) { }
+  constructor(private auth: AngularFireAuth,
+              private firestore: AngularFirestore) { }
 
   // Método para conocer el estado actual del usuario (si esta conectado, desconectado, su información, etc)
   // Lo ideal es ejecutar este método en el componente raiz de la aplicación
@@ -20,9 +23,13 @@ export class AuthService {
     })
   }
 
-  createUser(name: string, email: string, password: string): Promise<firebase.auth.UserCredential> {
+  createUser(name: string, email: string, password: string): Promise<void> {
     // Retornar la promesa del usuario creado mediante email y password
-    return this.auth.createUserWithEmailAndPassword(email, password);
+    return this.auth.createUserWithEmailAndPassword(email, password).then(({user}) => {
+      // Crear un documento de firestore con los datos del usuario
+      const newUser = new User(user?.uid, name, email);
+      return this.firestore.doc(`${ user?.uid}/user`).set({...newUser});
+    });
   }
 
   loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
