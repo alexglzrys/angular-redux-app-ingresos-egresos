@@ -17,11 +17,17 @@ import * as authActions from 'src/app/auth/auth.actions';
 export class AuthService {
 
   userSubscription!: Subscription;
+  private _user!: User | null;
 
   // Redux: Inyectar el store. Este servicio cuenta con métodos que cuyas acciones pueden modificar el estado global de la aplicación
   constructor(private auth: AngularFireAuth,
               private firestore: AngularFirestore,
               private store: Store<AppState>) { }
+
+  // GETTER para recuperar la información del usuaro logeado a través de este servicio
+  get user() {
+    return this._user;
+  }
 
   // Método para conocer el estado actual del usuario (si esta conectado, desconectado, su información, etc)
   // Lo ideal es ejecutar este método en el componente raiz de la aplicación
@@ -36,6 +42,8 @@ export class AuthService {
         this.userSubscription = this.firestore.doc(`${ fire_user.uid }/user`).valueChanges().subscribe(firestoreUser => {
           // Transformar la colección de firestore a un objeto de tipo User
           const user = User.fromFirestore(firestoreUser);
+          // Guardar una referencia del usuario logeado en el ámbito global de este servicio
+          this._user = user;
           // Redux: Guardar información general del usuario en el store
           this.store.dispatch( authActions.setUser({user}) );
         })
@@ -44,6 +52,8 @@ export class AuthService {
         this.store.dispatch( authActions.unsetUser() );
         // Cancelar la suscripción para evitar fugas de memoria (ya no me interesa dar seguimiento al usuario deslogeado)
         this.userSubscription.unsubscribe();
+        // Limpiar la referecia del usuario logeado en el servicio
+        this._user = null;
       }
     })
   }
