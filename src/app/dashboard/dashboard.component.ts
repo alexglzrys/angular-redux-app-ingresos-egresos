@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 import { AppState } from '../app.reducer';
+import * as ingresoEgresoActions from '../ingreso-egreso/ingreso-egreso.actions';
+
+import { Subscription } from 'rxjs';
 import { IngresoEgresoService } from '../services/ingreso-egreso.service';
 import { filter } from 'rxjs/operators';
 import { User } from '../models/User';
@@ -15,6 +18,7 @@ import { User } from '../models/User';
 export class DashboardComponent implements OnInit, OnDestroy {
 
   userSubs!: Subscription;
+  ingresoEgresoSubs!: Subscription;
 
   constructor(private store: Store<AppState>,
               private ingresoEgresoService: IngresoEgresoService) { }
@@ -27,12 +31,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
       filter(({user}) => user != null)
     ).subscribe(({user}) => {
       // Invocar el servicio encargado de recuperar y escuchar cambios en los ingresos y egresos de este usuario
-      this.ingresoEgresoService.ingresosEgresosListener(user!.uid!)
+      this.ingresoEgresoSubs = this.ingresoEgresoService.ingresosEgresosListener(user!.uid!)
+        .subscribe(ingresosEgresos => {
+          console.log(ingresosEgresos);
+          // Redux: Despachar acción para almacenar el listado de ingresos y egresos en el store
+          this.store.dispatch( ingresoEgresoActions.setItems({items: ingresosEgresos}) );
+        })
     });
   }
 
   ngOnDestroy(): void {
       this.userSubs.unsubscribe();
+      this.ingresoEgresoSubs.unsubscribe
   }
 
 }
