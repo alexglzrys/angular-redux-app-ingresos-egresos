@@ -49,4 +49,13 @@ export class IngresoEgresoService {
         map(collections => collections.map(docRef => ({uid: docRef.payload.doc.id, ...docRef.payload.doc.data() as any})))
       );
   }
+
+  borrarIngresoEgreso(uidIngresoEgreso: string): Promise<void> {
+    // Obtener el uid del usuario (nodo base en firestore)
+    const uid = this.authService.user?.uid;
+    // Construir todo el path que apunta al documento a eliminar
+    const path = `${ uid }/ingreso-egreso/items/${ uidIngresoEgreso }`;
+    // Eliminar el documento
+    return this.firestore.doc(path).delete();
+  }
 }

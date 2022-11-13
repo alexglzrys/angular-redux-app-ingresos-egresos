@@ -24,7 +24,9 @@
                       {{ ie.type | uppercase }}
                   </td>
                   <td>
-                    <button type="button" class="btn btn-danger" (click)="eliminar(ie!.uid!)">Eliminar</button>
+                    <button type="button" class="btn btn-danger" (click)="eliminar(ie!.uid!, ie.description)">
+                      <i class="fa fa-trash"></i> Eliminar
+                    </button>
                   </td>
                 </tr>
               </tbody>
