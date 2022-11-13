@@ -26,4 +26,11 @@ export class IngresoEgresoService {
       .collection('items')
       .add({...ingresoEgreso})
   }
+
+  // Recuperar mi colección de docuementos (items) referentes a los ingresos y egresos
+  ingresosEgresosListener(uid: string) {
+    return this.firestore.collection(`${ uid }/ingreso-egreso/items`).valueChanges().subscribe(items => {
+      console.log(items)
+    })
+  }
 }
