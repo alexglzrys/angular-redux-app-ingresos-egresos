@@ -15,11 +15,17 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Descripción</td>
-                  <td>Monto</td>
-                  <td>Tipo</td>
-                  <td>acciones</td>
+                <tr *ngFor="let ie of ingresosEgresos">
+                  <td>{{ ie.description }}</td>
+                  <td>{{ ie.amount | currency }}</td>
+                  <!-- Colocar una clase con base a una condición -->
+                  <td [class.text-success]="ie.type == 'ingreso'"
+                      [class.text-danger]="ie.type == 'egreso'">
+                      {{ ie.type | uppercase }}
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger" (click)="eliminar(ie!.uid!)">Eliminar</button>
+                  </td>
                 </tr>
               </tbody>
 
@@ -30,4 +36,4 @@
         </div>
     </div>
 </div>
-  
+

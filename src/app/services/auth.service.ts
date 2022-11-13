@@ -10,6 +10,7 @@ import { User } from '../models/User';
 // Redux
 import { AppState } from '../app.reducer';
 import * as authActions from 'src/app/auth/auth.actions';
+import * as ingresoEgresoActions from '../ingreso-egreso/ingreso-egreso.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -50,8 +51,11 @@ export class AuthService {
       } else {
         // Redux: El usuario cerro sesión en la aplicación
         this.store.dispatch( authActions.unsetUser() );
+        // Redux: El usuario cerro sesión por tanto tengo que limpiar mi listado de items
+        this.store.dispatch( ingresoEgresoActions.unsetItems() );
         // Cancelar la suscripción para evitar fugas de memoria (ya no me interesa dar seguimiento al usuario deslogeado)
         this.userSubscription.unsubscribe();
+
         // Limpiar la referecia del usuario logeado en el servicio
         this._user = null;
       }
