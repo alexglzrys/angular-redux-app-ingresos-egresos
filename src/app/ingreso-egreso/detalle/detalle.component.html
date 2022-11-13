@@ -15,7 +15,7 @@
               </thead>
 
               <tbody>
-                <tr *ngFor="let ie of ingresosEgresos">
+                <tr *ngFor="let ie of ingresosEgresos | ordenarIngresosEgresos">
                   <td>{{ ie.description }}</td>
                   <td>{{ ie.amount | currency }}</td>
                   <!-- Colocar una clase con base a una condición -->

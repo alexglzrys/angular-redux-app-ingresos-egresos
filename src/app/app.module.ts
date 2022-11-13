@@ -24,6 +24,7 @@ import { DetalleComponent } from './ingreso-egreso/detalle/detalle.component';
 import { EstadisticaComponent } from './ingreso-egreso/estadistica/estadistica.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
+import { OrdenarIngresosEgresosPipe } from './pipes/ordenar-ingresos-egresos.pipe';
 
 
 
@@ -39,7 +40,8 @@ import { environment } from 'src/environments/environment';
     SidebarComponent,
     IngresoEgresoComponent,
     DetalleComponent,
-    EstadisticaComponent
+    EstadisticaComponent,
+    OrdenarIngresosEgresosPipe
   ],
   imports: [
     BrowserModule,
