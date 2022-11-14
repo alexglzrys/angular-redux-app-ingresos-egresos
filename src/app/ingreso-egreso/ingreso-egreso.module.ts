@@ -13,6 +13,7 @@ import { EstadisticaComponent } from './estadistica/estadistica.component';
 // Pipes
 import { OrdenarIngresosEgresosPipe } from '../pipes/ordenar-ingresos-egresos.pipe';
 import { RouterModule } from '@angular/router';
+import { DashboardRoutingModule } from '../dashboard/dashboard-routing.module';
 
 // ng g m ingreso-egreso/ingreso-egreso --flat
 
@@ -30,6 +31,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     NgChartsModule,
     SharedModule,
+    // Módulo con listado de rutas hijas
+    DashboardRoutingModule,
   ]
 })
 export class IngresoEgresoModule { }

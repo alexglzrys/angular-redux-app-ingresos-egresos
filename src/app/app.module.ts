@@ -17,7 +17,6 @@ import { environment } from 'src/environments/environment';
 
 // Módulos de aplicación
 import { AuthModule } from './auth/auth.module';
-import { IngresoEgresoModule } from './ingreso-egreso/ingreso-egreso.module';
 
 
 @NgModule({
@@ -36,7 +35,6 @@ import { IngresoEgresoModule } from './ingreso-egreso/ingreso-egreso.module';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     // Módulos de aplicación
     AuthModule,
-    IngresoEgresoModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
