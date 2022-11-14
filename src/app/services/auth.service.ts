@@ -54,7 +54,7 @@ export class AuthService {
         // Redux: El usuario cerro sesión por tanto tengo que limpiar mi listado de items
         this.store.dispatch( ingresoEgresoActions.unsetItems() );
         // Cancelar la suscripción para evitar fugas de memoria (ya no me interesa dar seguimiento al usuario deslogeado)
-        this.userSubscription.unsubscribe();
+        this.userSubscription?.unsubscribe();
 
         // Limpiar la referecia del usuario logeado en el servicio
         this._user = null;

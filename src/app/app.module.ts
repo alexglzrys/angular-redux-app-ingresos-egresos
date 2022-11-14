@@ -16,8 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -29,14 +28,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
 import { OrdenarIngresosEgresosPipe } from './pipes/ordenar-ingresos-egresos.pipe';
 
-
+// Módulos de aplicación
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     DashboardComponent,
     FooterComponent,
     NavbarComponent,
@@ -57,7 +55,8 @@ import { OrdenarIngresosEgresosPipe } from './pipes/ordenar-ingresos-egresos.pip
     StoreModule.forRoot(appReducers),
     // Declarar módulo para inspeccionar el estado a través de las Redux DevTools
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    NgChartsModule
+    NgChartsModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
