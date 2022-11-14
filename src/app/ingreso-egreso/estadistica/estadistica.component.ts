@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 // ng2-charts
-import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 // Redux
 import { Store } from '@ngrx/store';
-import { AppState } from '../../app.reducer';
 import { Subscription } from 'rxjs';
 import { IngresoEgreso } from '../../models/IngresoEgreso';
 import { BaseChartDirective } from 'ng2-charts';
+import { AppStateWithIngresoEgreso } from '../ingreso-egreso.reducer';
 
 @Component({
   selector: 'app-estadistica',
@@ -36,7 +36,7 @@ export class EstadisticaComponent implements OnInit, OnDestroy {
   };
 
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppStateWithIngresoEgreso>) { }
 
   ngOnInit(): void {
     // Suscribirme al estado actual de los ingresos y egresos

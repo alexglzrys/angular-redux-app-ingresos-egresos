@@ -14,6 +14,8 @@ import { EstadisticaComponent } from './estadistica/estadistica.component';
 import { OrdenarIngresosEgresosPipe } from '../pipes/ordenar-ingresos-egresos.pipe';
 import { RouterModule } from '@angular/router';
 import { DashboardRoutingModule } from '../dashboard/dashboard-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { ingresoEgresoReducer } from './ingreso-egreso.reducer';
 
 // ng g m ingreso-egreso/ingreso-egreso --flat
 
@@ -31,6 +33,9 @@ import { DashboardRoutingModule } from '../dashboard/dashboard-routing.module';
     ReactiveFormsModule,
     NgChartsModule,
     SharedModule,
+    // Especificar el estado que se debe cargar de forma peresoza
+    // Un módulo lazyLoad que tiene asociado uno o varios estados en el store, estos támbien deberían cargarse mediante LazyLoad
+    StoreModule.forFeature('ingresosEgresos', ingresoEgresoReducer),
     // Módulo con listado de rutas hijas
     DashboardRoutingModule,
   ]
